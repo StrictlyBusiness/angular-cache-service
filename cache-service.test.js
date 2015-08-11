@@ -1,6 +1,3 @@
-﻿import angular from 'angular';
-import _ from 'lodash';
-
 import CacheService from './cache-service';
 
 describe('CacheService', function() {
