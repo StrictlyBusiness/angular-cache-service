@@ -12,7 +12,7 @@ var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var karma = require('karma').server;
 var path = require('path');
-
+var babel = require("gulp-babel");
 //=============================================
 //            DECLARE VARIABLES
 //=============================================
@@ -78,4 +78,12 @@ gulp.task('test:unit', function(cb) {
     }
     cb();
   });
+});
+
+
+
+gulp.task("compile", function () {
+  return gulp.src("cache-service.js")
+    .pipe(babel())
+    .pipe(gulp.dest("dist"));
 });

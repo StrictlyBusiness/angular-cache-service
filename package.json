@@ -2,7 +2,7 @@
   "name": "angular-cache-service",
   "version": "0.0.2",
   "description": "AngularJS Service for caching objects",
-  "main": "cache-service.js",
+  "main": "dist/cache-service.js",
   "scripts": {
     "test": "gulp test:unit",
     "postinstall": "jspm install"
@@ -22,6 +22,7 @@
     "del": "1.2.0",
     "eslint": "1.1.0",
     "gulp": "3.9.0",
+    "gulp-babel": "^5.2.0",
     "gulp-load-plugins": "0.10.0",
     "gulp-util": "^3.0.6",
     "jspm": "0.15.7",
