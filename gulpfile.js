@@ -83,7 +83,7 @@ gulp.task('test:unit', function(cb) {
 
 
 gulp.task("compile", function () {
-  return gulp.src("cache-service.js")
+  return gulp.src("*-service.js")
     .pipe(babel())
     .pipe(gulp.dest("dist"));
 });
