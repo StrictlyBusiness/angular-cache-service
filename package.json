@@ -1,6 +1,6 @@
 {
   "name": "angular-cache-service",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "AngularJS Service for caching objects",
   "main": "dist/cache-service.js",
   "scripts": {
