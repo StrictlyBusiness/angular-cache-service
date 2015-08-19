@@ -62,7 +62,7 @@ var paths = {
 /**
  * The 'test:unit' task to run karma unit tests
  */
-gulp.task('test:unit', function(cb) {
+gulp.task('test:unit', ['eslint'], function(cb) {
   // run the karma test
   karma.start({
     configFile: path.join(__dirname, paths.test.config.karma),
@@ -80,10 +80,20 @@ gulp.task('test:unit', function(cb) {
   });
 });
 
+/**
+ * The 'eslint' task defines the rules of our hinter as well as which files
+ * we should check. It helps to detect errors and potential problems in our
+ * JavaScript code.
+ */
+gulp.task('eslint', function() {
+  return gulp.src(['*.js', '!config.js'])
+    .pipe(plugins.eslint())
+    .pipe(plugins.eslint.formatEach())
+    .pipe(plugins.eslint.failAfterError());
+});
 
-
-gulp.task("compile", function () {
-  return gulp.src("*-service.js")
+gulp.task('compile', ['eslint'], function () {
+  return gulp.src('*-service.js')
     .pipe(babel())
-    .pipe(gulp.dest("dist"));
+    .pipe(gulp.dest('dist'));
 });
