@@ -26,13 +26,13 @@
     "gulp-load-plugins": "0.10.0",
     "gulp-util": "^3.0.6",
     "jspm": "0.15.7",
-    "karma": "0.13.8",
+    "karma": "0.13.9",
     "karma-chrome-launcher": "0.2.0",
-    "karma-jspm": "1.1.5",
+    "karma-jspm": "2.0.1",
     "karma-mocha": "0.2.0",
-    "karma-mocha-reporter": "^1.1.1",
+    "karma-mocha-reporter": "1.1.1",
     "karma-sinon-chai": "1.0.0",
-    "mocha": "^2.2.5"
+    "mocha": "2.2.5"
   },
   "jspm": {
     "directories": {},
