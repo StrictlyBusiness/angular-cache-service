@@ -1,4 +1,5 @@
 System.config({
+  "baseURL": "/",
   "transpiler": "babel",
   "babelOptions": {
     "optional": [
@@ -9,7 +10,8 @@ System.config({
     "*": "*.js",
     "github:*": "jspm_packages/github/*.js",
     "npm:*": "jspm_packages/npm/*.js"
-  }
+  },
+  "defaultJSExtensions": true
 });
 
 System.config({
