@@ -1,104 +1,73 @@
 /* eslint-disable no-underscore-dangle */
-'use strict';
+import _ from 'lodash';
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
+export default class CacheService {
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-var _lodash = require('lodash');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var CacheService = (function () {
-  function CacheService() {
-    _classCallCheck(this, CacheService);
-
+  constructor() {
     this._cache = {};
   }
 
   // Returns an object that has been cached under the defined key for the
   // defined type
+  get(type, id) {
 
-  _createClass(CacheService, [{
-    key: 'get',
-    value: function get(type, id) {
+    // Get the type cache
+    let typeCache = this._cache[type];
 
-      // Get the type cache
-      var typeCache = this._cache[type];
-
-      // If it doesn't exist, return undefined
-      if (!typeCache) {
-        return typeCache;
-      }
-
-      // Get the existing entry
-      return typeCache[id];
+    // If it doesn't exist, return undefined
+    if (!typeCache) {
+      return typeCache;
     }
 
-    // Sets the value for the specified key.
-  }, {
-    key: 'set',
-    value: function set(type, id, newValue) {
+    // Get the existing entry
+    return typeCache[id];
+  }
 
-      // Get the type cache or create if it doesn't exist
-      var typeCache = this._cache[type];
-      if (!typeCache) {
-        typeCache = {};
-        this._cache[type] = typeCache;
-      }
+  // Sets the value for the specified key.
+  set(type, id, newValue) {
 
-      // Get the existing entry from the type cache
-      var value = typeCache[id];
-
-      if (value) {
-        _lodash2['default'].extend(value, newValue);
-      } else {
-        value = typeCache[id] = newValue;
-      }
-
-      return value;
+    // Get the type cache or create if it doesn't exist
+    let typeCache = this._cache[type];
+    if (!typeCache) {
+      typeCache = {};
+      this._cache[type] = typeCache;
     }
 
-    // Returns true if there is a cached value for this key
-  }, {
-    key: 'isCached',
-    value: function isCached(type, id) {
-      return !_lodash2['default'].isUndefined(this.get(type, id));
+    // Get the existing entry from the type cache
+    let value = typeCache[id];
+
+    if (value) {
+      _.extend(value, newValue);
+    } else {
+      value = typeCache[id] = newValue;
     }
 
-    // Removes the value associated with the key from the cache
-  }, {
-    key: 'remove',
-    value: function remove(type, id) {
+    return value;
+  }
 
-      // Get the typeCache and if it doesn't exist, return undefined
-      var typeCache = this._cache[type];
-      if (!typeCache) {
-        return typeCache;
-      }
+  // Returns true if there is a cached value for this key
+  isCached(type, id) {
+    return !_.isUndefined(this.get(type, id));
+  }
 
-      var value = typeCache[id];
-      delete typeCache[id];
-      return value;
+  // Removes the value associated with the key from the cache
+  remove(type, id) {
+
+    // Get the typeCache and if it doesn't exist, return undefined
+    let typeCache = this._cache[type];
+    if (!typeCache) {
+      return typeCache;
     }
 
-    // Clears all the values in the cache and returns a resolved promise when it
-    // is completed
-  }, {
-    key: 'clear',
-    value: function clear() {
-      this._cache = {};
-    }
-  }]);
+    let value = typeCache[id];
+    delete typeCache[id];
+    return value;
+  }
 
-  return CacheService;
-})();
+  // Clears all the values in the cache and returns a resolved promise when it
+  // is completed
+  clear() {
+    this._cache = {};
+  }
 
-exports['default'] = CacheService;
-module.exports = exports['default'];
+}

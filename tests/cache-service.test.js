@@ -1,4 +1,4 @@
-import CacheService from './cache-service';
+import CacheService from '/dist/cache-service';
 
 describe('CacheService', function() {
 
@@ -15,23 +15,23 @@ describe('CacheService', function() {
 
     it('should retrieve undefined if a get does not exist', function() {
       let actual = cacheService.get('Object', 1);
-      expect(actual).to.be.undefined;
+      should.not.exist(actual);
     });
 
     it('should retrieve null if the key has been set to null', function() {
       let expected = cacheService.set('Object', 1, null);
-      expect(expected).to.be.null;
+      should.not.exist(expected);
       let actual = cacheService.get('Object', 1);
-      expect(actual).to.be.null;
+      should.not.exist(actual);
     });
 
     it('should retrieve a value if it has been set', function() {
       let expected = { id: 1, name: 'test' };
       cacheService.set('Object', expected.id, expected);
       let actual = cacheService.get('Object', expected.id);
-      expect(actual).to.not.be.null;
-      expect(actual.id).to.equal(expected.id);
-      expect(actual.name).to.equal(expected.name);
+      should.exist(actual);
+      actual.id.should.equal(expected.id);
+      actual.name.should.equal(expected.name);
     });
 
     it('should retrieve the correct object if two types have the same id', function() {
@@ -41,7 +41,7 @@ describe('CacheService', function() {
       cacheService.set('Other', other.id, other);
 
       let actual = cacheService.get('Object', expected.id);
-      expect(actual).to.equal(expected);
+      actual.should.equal(expected);
     });
 
     it('once set, it should return the same object instance, even if updated', function() {
@@ -56,10 +56,10 @@ describe('CacheService', function() {
       // Get the instance and compare
       let actual = cacheService.get('Object', expected.id);
       // Must be the same instance (extended)
-      expect(actual).to.equal(expected);
+      actual.should.equal(expected);
       // Should contain the updated values
-      expect(actual.id).to.equal(updated.id);
-      expect(actual.name).to.equal(updated.name);
+      actual.id.should.equal(updated.id);
+      actual.name.should.equal(updated.name);
     });
 
   });
@@ -74,7 +74,7 @@ describe('CacheService', function() {
 
       // See if the object is in the cache
       let actual = cacheService.isCached('Object', expected.id);
-      expect(actual).to.be.true;
+      actual.should.be.true;
 
     });
 
@@ -82,7 +82,7 @@ describe('CacheService', function() {
 
       // See if the object is in the cache
       let actual = cacheService.isCached('Object', 1);
-      expect(actual).to.be.false;
+      actual.should.be.false;
 
     });
 
@@ -93,7 +93,7 @@ describe('CacheService', function() {
 
       // See if the object is in the cache
       let actual = cacheService.isCached('Object', 1);
-      expect(actual).to.be.true;
+      actual.should.be.true;
 
     });
 
@@ -108,11 +108,11 @@ describe('CacheService', function() {
 
       // Remove it from the cache and make sure it returns the stored value
       let actual = cacheService.remove('Object', expected.id);
-      expect(actual).to.be.equal(expected);
+      actual.should.be.equal(expected);
 
       // Verify it is gone
       actual = cacheService.get('Object', expected.id);
-      expect(actual).to.be.undefined;
+      should.not.exist(actual);
 
     });
 
@@ -120,11 +120,11 @@ describe('CacheService', function() {
 
       // Remove it from the cache
       let actual = cacheService.remove('Object', 1);
-      expect(actual).to.be.undefined;
+      should.not.exist(actual);
 
       // Get the instance and compare
       actual = cacheService.get('Object', 1);
-      expect(actual).to.be.undefined;
+      should.not.exist(actual);
 
     });
 
@@ -145,9 +145,9 @@ describe('CacheService', function() {
 
       // Get the instances and compare
       let actual1 = cacheService.get('Object', expected1.id);
-      expect(actual1).to.be.undefined;
+      should.not.exist(actual1);
       let actual2 = cacheService.get('Object', expected2.id);
-      expect(actual2).to.be.undefined;
+      should.not.exist(actual2);
 
     });
 
