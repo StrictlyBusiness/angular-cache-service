@@ -44,7 +44,7 @@
     "dependencies": {
       "babel": "npm:babel-core@^5.8.38",
       "bluebird": "npm:bluebird@^3.5.1",
-      "lodash": "npm:lodash@^4.0.1"
+      "lodash": "npm:lodash@^4.17.10"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.38",
